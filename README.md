@@ -1,8 +1,6 @@
-Here's a modified version of the README for your custom Next.js template repository, incorporating the alias you've created:
+# Next.js Custom Template
 
 ---
-
-# Next.js Custom Template
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), enhanced with FontAwesome and React Icons.
 
