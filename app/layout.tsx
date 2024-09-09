@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
-import 'lib/fontawesome'; // Import the library setup
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import 'lib/fontawesome';
 import { Providers } from "./providers";
+import Navbar from "@/ui/Navbar";
+import Footer from "@/ui/Footer";
 
-config.autoAddCss = false; // Prevent FontAwesome from adding its own CSS
+config.autoAddCss = false;
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,7 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          {children}
+          <Navbar />
+          <main className='pt-20 md:pt-32'>
+            {children}
+          </main>
+          <Footer />
         </Providers>
       </body>
     </html>
