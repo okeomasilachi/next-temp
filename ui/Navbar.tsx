@@ -11,7 +11,7 @@ import {
     MenuList, MenuItem,
     Container
 } from '@chakra-ui/react';
-import { FaRegEnvelope, FaBriefcase } from "react-icons/fa";
+import { FaBriefcase } from "react-icons/fa";
 import { MdModelTraining } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";;
 import { IoIosArrowDown } from "react-icons/io";
@@ -19,7 +19,8 @@ import { FaDoorOpen } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressCard, faBars, faCircleXmark, faHouse, faUserTie, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { usePathname } from 'next/navigation';
-import { IconType } from 'react-icons/lib';
+import { Menu_Item } from "lib/Types";
+
 
 const renderIcon = (icon: any) => {
     if (typeof icon === 'function') {
@@ -30,19 +31,12 @@ const renderIcon = (icon: any) => {
     return null;
 };
 
-type MenuItem = {
-    route: string;
-    text: string;
-    icon: IconDefinition | IconType;
-    menu?: Array<{ route: string; text: string; icon: IconDefinition | IconType }>;
-};
-
 const DesktopNavLinks: React.FC = () => {
     const pathname = usePathname();
     const text = useBreakpointValue({ md: true, lg: false });
     const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
-    const menuItems: MenuItem[] = [
+    const menuItems: Menu_Item[] = [
         { route: '/', text: 'Discover', icon: faHouse },
         {
             route: '/about', text: 'About', icon: faUserTie,
@@ -118,7 +112,7 @@ const MobileDrawer: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOp
     const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
 
-    const menuItems: MenuItem[] = [
+    const menuItems: Menu_Item[] = [
         { route: '/', text: 'Discover', icon: faHouse },
         {
             route: '/about', text: 'About', icon: faUserTie,
@@ -235,9 +229,9 @@ const Navbar: React.FC = () => {
         >
             <Container>
                 <Flex
+
                     align="center"
                     justify="space-between"
-                    rounded={{ base: "none", lg: "lg" }}
                     padding={{ base: "1", md: "4" }}
                     margin="0 auto"
                 >
@@ -245,8 +239,8 @@ const Navbar: React.FC = () => {
                         <Image
                             src="https://via.placeholder.com/150"
                             alt="Logo"
-                            h={{ base: '35px', lg: '50px' }}
-                            w={{ base: '35px', lg: '50px' }}
+                            h={{ base: '40px', lg: '50px' }}
+                            w={{ base: '40px', lg: '50px' }}
                             bg='transparent'
                             ml={{ base: 2, md: 0 }}
                             borderRadius="full"
