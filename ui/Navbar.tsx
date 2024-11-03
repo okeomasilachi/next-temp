@@ -105,8 +105,6 @@ const Navbar: React.FC = () => {
                             size="lg"
                             href="!#"
                             variant={'outline'}
-                            size={'sm'}
-                            // rounded='lg'
                             rel="noopener noreferrer"
                         >Contact</Button>
                         <IconButton

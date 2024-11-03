@@ -210,6 +210,7 @@ const ServicesGrid: React.FC = () => {
 
 export default ServicesGrid;
 
+// @ts-expect-error - None of the props are used in this component
 const WhyChooseUsItem = ({ title, description, icon }) => (
     <VStack align="center">
         {icon}

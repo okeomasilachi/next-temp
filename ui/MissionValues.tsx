@@ -31,7 +31,7 @@ function MissionValues() {
                 </Heading>
                 <Text fontSize="lg" color="gray.600" mb={6}>
                     At Care Care, our mission is to deliver exceptional car wash and detailing services that
-                    enhance the appearance and longevity of our customers' vehicles. We prioritize customer
+                    enhance the appearance and longevity of our customer&apos;s vehicles. We prioritize customer
                     satisfaction and strive to exceed expectations with every wash.
                 </Text>
 
