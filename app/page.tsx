@@ -1,11 +1,19 @@
-import { Container } from "@chakra-ui/react";
+import Explore from "@/ui/Explore";
+import FAQSection from "@/ui/FAQSection";
+import Hero from "@/ui/Hero";
+import MissionValues from "@/ui/MissionValues";
+import PricingPlan from "@/ui/PricingPlan";
+import Testimonials from "@/ui/Teastimonial";
 
 export default function Home() {
   return (
     <>
-      <Container h='100vh'>
-        <h1> Hello world!... Welcome to the Home page</h1>
-      </Container>
+      <Hero />
+      <Explore />
+      <Testimonials />
+      <MissionValues />
+      <FAQSection />
+      <PricingPlan />
     </>
   );
 }

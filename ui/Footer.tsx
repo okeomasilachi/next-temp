@@ -1,51 +1,105 @@
-import { Link, Flex, Box, Divider, Image, Text, Container } from '@chakra-ui/react'
-import { faFacebook, faInstagram, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+"use client";
 
-export default function Footer() {
-    return (
-        <Flex
-            // position="relative"
-            // bgImage={'url("/img3.svg")'}
-            // bgPosition="center"
-            // bgRepeat="no-repeat"
-            // bgSize="cover"
-            // h={{ base: "auto", md: "80vh" }}
-            justifyContent='center'
-            alignItems='center'
-            py={10}
-            overflow="hidden"
-            className='text-bl'
-        >
-            <Container w="full"  px={{ base: 4, md: 8 }} flexDirection='column' justifyContent='center'>
-                <Flex flexDirection={{ base: "column", lg: "row" }} gap={{ base: 4, lg: 10 }} alignItems="center" justifyContent={{ base: "space-around", lg: 'space-between' }}>
-                    <Image rounded='full' w={{ base: "20%", lg: "10%" }} h="auto" src="https://via.placeholder.com/200" alt="logo" />
+import { Box, Container, Flex, Heading, Input, Text, Link, Divider, Button, Icon, VStack, HStack, Image } from '@chakra-ui/react';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import React from 'react';
 
-                    <Flex alignSelf={"center"} flexWrap={{ base: "wrap", lg: "nowrap" }} gap={{ base: 4, lg: 7 }} alignItems={'Center'} justifyContent={{ base: "center", lg: 'space-between' }}>
-                        <Link className='text-xl italic font-thin' href='#!'>Products</Link>
-                        <Link className='text-xl italic font-thin' href='#!'>Our Story</Link>
-                        <Link className='text-xl italic font-thin' href='#!'>Contact Us</Link>
-                        <Link className='text-xl italic font-thin' href='#!'>FAQ</Link>
-                        <Link className='text-xl italic font-thin' href='#!'>Sustainability</Link>
-                    </Flex>
+const Footer: React.FC = () => {
+  return (
+    <Box as="footer" bg="primary.700" color="white" py={20} px={5} borderTop="1px solid" borderColor="gray.500">
+      <Container maxW="container.xl">
+        <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between" align={{ base: 'start', lg: 'center' }} gap="8">
+          {/* Logo and Description */}
+          <Box >
+            <Image src="/logo-cropped.svg" alt="Car Care Logo"  maxW={300}/>
+            <Heading textAlign={'center'} as="h1" size="lg" fontFamily="Dancing Script">
+              Car Care
+            </Heading>
+          </Box>
 
-                    <Flex gap={7}>
-                        <Link href='#!'><FontAwesomeIcon className="text-2xl" icon={faFacebook} /></Link>
-                        <Link href='#!'><FontAwesomeIcon className="text-2xl" icon={faInstagram} /></Link>
-                        <Link href='#!'><FontAwesomeIcon className="text-2xl" icon={faYoutube} /></Link>
-                        <Link href='#!'><FontAwesomeIcon className="text-2xl" icon={faXTwitter} /></Link>
-                    </Flex>
-                </Flex>
+          {/* Links Section */}
+          <Flex direction={{ base: 'column', lg: 'row' }} gap={12}>
+            {/* Company Links */}
+            <VStack alignItems={'start'}>
+              <Heading as="h2" size="md" fontWeight="bold">
+                Company
+              </Heading>
+              <Link href="#" fontSize="lg" fontWeight="10px" mt="2" _hover={{ textDecoration: 'underline' }}>
+                About Us
+              </Link>
+              <Link href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+                Services
+              </Link>
+            </VStack>
 
-                <Divider size='lg' my={10} />
+            {/* Support Links */}
+            <VStack alignItems={'start'}>
+              <Heading as="h2" size="md" fontWeight="bold">
+                Support
+              </Heading>
+              <Link href="#" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
+                Faqs
+              </Link>
+              <Link href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+                Booking
+              </Link>
+            </VStack>
 
-                <Flex flexDirection={{ base: "column", lg: "row" }} gap={{ base: 4, lg: 10 }} justifyContent='center' alignItems='center'>
-                    <Text>© 2024 [company Name]. All rights reserved.</Text>
-                    <Link href="#!">Privacy Policy</Link>
-                    <Link href="#!">Terms and Conditions</Link>
-                </Flex>
-            </Container>
+            {/* Legal Links */}
+            <VStack alignItems={'start'}>
+              <Heading as="h2" size="md" fontWeight="bold">
+                Legal
+              </Heading>
+              <Link href="#" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
+                Privacy Policy
+              </Link>
+              <Link href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+                Terms Of Service
+              </Link>
+            </VStack>
+          </Flex>
         </Flex>
-    )
-}
+
+        <Divider my="6" borderColor="gray.300" />
+
+        {/* Footer Bottom Links */}
+        <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between" align="center" fontSize="lg" gap="4">
+          <Flex gap="4">
+          <Text fontSize="sm" mt="2">
+              © {new Date().getFullYear()} care care. All rights reserved. Your trusted partner in car care solutions.
+            </Text>
+            {/* <Link href="#" _hover={{ textDecoration: 'underline' }}>
+              Privacy Policy
+            </Link>
+            <Link href="#" _hover={{ textDecoration: 'underline' }}>
+              Terms Of Service
+            </Link> */}
+          </Flex>
+
+          {/* Social Media Icons */}
+          <HStack gap="4" alignItems={'center'} justifyContent={'end'}>
+            <Link href="#" aria-label="Facebook" color="white" _hover={{ color: 'blue.500' }}>
+              <Icon as={Facebook} boxSize="20px" mb={2} h='full' />
+            </Link>
+            
+            <Link href="#" aria-label="Twitter" color="white" _hover={{ color: '#25d366' }}>
+              <Icon as={FontAwesomeIcon} icon={faWhatsapp} boxSize="20px" h='full'/>
+            </Link>
+
+            <Link href="#" aria-label="Instagram" color="white" _hover={{ color: 'pink.500' }}>
+              <Icon as={FontAwesomeIcon} icon={faInstagram}  boxSize="20px" h='full'/>
+            </Link>
+            
+            <Link href="#" aria-label="Twitter" color="white" _hover={{ color: 'blue.400' }}>
+              <Icon as={FontAwesomeIcon} icon={faXTwitter} boxSize="20px" h='full'/>
+            </Link>
+          </HStack>
+        </Flex>
+      </Container>
+    </Box>
+  );
+};
+
+export default Footer;

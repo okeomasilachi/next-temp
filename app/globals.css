@@ -2,83 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  background: linear-gradient(90deg, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb)));
-  color: rgb(var(--foreground-rgb));
-}
-
-/* Base container styles */
-.container {
-  --tw-gutter-x: 1.5rem;
-  --tw-gutter-y: 0;
-  width: 100%;
-  padding-right: calc(var(--tw-gutter-x) * 0.5);
-  padding-left: calc(var(--tw-gutter-x) * 0.5);
-  margin-right: auto;
-  margin-left: auto;
-}
-
-/* Responsive max-widths */
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1320px;
-  }
-}
-
-/* Ensuring proper padding at different screen sizes */
-.container {
-  padding-right: calc(var(--tw-gutter-x) * 0.5);
-  padding-left: calc(var(--tw-gutter-x) * 0.5);
-}
-
-/* Root variables */
-:root {
-  --tw-breakpoint-xs: 0;
-  --tw-breakpoint-sm: 576px;
-  --tw-breakpoint-md: 768px;
-  --tw-breakpoint-lg: 992px;
-  --tw-breakpoint-xl: 1200px;
-  --tw-breakpoint-xxl: 1400px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+html {
+    scroll-behavior: smooth;
 }
-
