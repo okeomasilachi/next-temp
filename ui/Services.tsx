@@ -161,50 +161,52 @@ const servicesData: GridItemMProps[] = [
 // Additional sections
 const ServicesGrid: React.FC = () => {
     return (
-        <Container py={{md: 10}}>
-            {/* Hero Section */}
-            <VStack spacing={6} textAlign="center" mb={10}>
-                <Heading as="h1" size="2xl">Professional Mobile Car Wash & Detailing</Heading>
-                <Text fontSize="lg" color="gray.600" >
-                    Experience top-notch car care with convenience at your doorstep. Let us handle every detail with our specialized services.
-                </Text>
-                <Button colorScheme="primary" size="lg" my={5}>Book a Service</Button>
-            </VStack>
+        <Box py={20}>
+            <Container py={{ md: 10 }}>
+                {/* Hero Section */}
+                <VStack spacing={6} textAlign="center" mb={10}>
+                    <Heading as="h1" size="2xl">Professional Mobile Car Wash & Detailing</Heading>
+                    <Text fontSize="lg" color="gray.600" >
+                        Experience top-notch car care with convenience at your doorstep. Let us handle every detail with our specialized services.
+                    </Text>
+                    <Button colorScheme="primary" size="lg" my={5}>Book a Service</Button>
+                </VStack>
 
-            {/* Services Grid */}
-            <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} gap={5} mb={10}>
-                {servicesData.map((service, index) => (
-                    <GridItemM
-                        key={index}
-                        title={service.title}
-                        description={service.description}
-                        backgroundImage={service.backgroundImage}
-                    />
-                ))}
-            </SimpleGrid>
-
-            {/* Testimonials Section */}
-            <Testimonials />
-
-            {/* Why Choose Us Section */}
-            <VStack spacing={6} textAlign="center" py={20}>
-                <Heading as="h2" size="lg" my={5}>Why Choose Car Care?</Heading>
-                <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
-                    <WhyChooseUsItem title="Convenience" description="Get your car washed wherever you are." icon={<LocateIcon color='#D6B65A' />} />
-                    <WhyChooseUsItem title="Quality Products" description="We use only the best products for your vehicle." icon={<Star color='#D6B65A'/>} />
-                    <WhyChooseUsItem title="Experienced Professionals" description="Our team has years of experience in car detailing." icon={<Shield color='#D6B65A'/>} />
+                {/* Services Grid */}
+                <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} gap={5} mb={10}>
+                    {servicesData.map((service, index) => (
+                        <GridItemM
+                            key={index}
+                            title={service.title}
+                            description={service.description}
+                            backgroundImage={service.backgroundImage}
+                        />
+                    ))}
                 </SimpleGrid>
-            </VStack>
 
-            {/* Call to Action */}
-            <VStack spacing={6} textAlign="center" pb={20} pt={20}>
-                <Heading as="h2" size="lg">Ready to Give Your Car the Care It Deserves?</Heading>
-                <Text fontSize="md" color="gray.600" maxW="3xl">
-                    Contact us to schedule a service today and see the Car Care difference for yourself.
-                </Text>
-                <Button colorScheme="black" size="lg">Contact Us</Button>
-            </VStack>
-        </Container>
+                {/* Testimonials Section */}
+                <Testimonials />
+
+                {/* Why Choose Us Section */}
+                <VStack spacing={6} textAlign="center" py={20}>
+                    <Heading as="h2" size="lg" my={5}>Why Choose Car Care?</Heading>
+                    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+                        <WhyChooseUsItem title="Convenience" description="Get your car washed wherever you are." icon={<LocateIcon color='#D6B65A' />} />
+                        <WhyChooseUsItem title="Quality Products" description="We use only the best products for your vehicle." icon={<Star color='#D6B65A' />} />
+                        <WhyChooseUsItem title="Experienced Professionals" description="Our team has years of experience in car detailing." icon={<Shield color='#D6B65A' />} />
+                    </SimpleGrid>
+                </VStack>
+
+                {/* Call to Action */}
+                <VStack spacing={6} textAlign="center" pb={20} pt={20}>
+                    <Heading as="h2" size="lg">Ready to Give Your Car the Care It Deserves?</Heading>
+                    <Text fontSize="md" color="gray.600" maxW="3xl">
+                        Contact us to schedule a service today and see the Car Care difference for yourself.
+                    </Text>
+                    <Button colorScheme="black" size="lg">Contact Us</Button>
+                </VStack>
+            </Container>
+        </Box>
     );
 };
 

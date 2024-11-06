@@ -72,10 +72,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
+  // viewport: {
+  //   width: 'device-width',
+  //   initialScale: 1,
+  // },
   verification: {
     google: 'your-google-verification-code', // Add your actual Google verification code
   },
