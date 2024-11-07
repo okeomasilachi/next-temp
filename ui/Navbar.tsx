@@ -1,15 +1,16 @@
 "use client";
+
 import {
     Box, Button,
     Container,
     Flex,
     Heading,
     HStack,
-    Icon,
     IconButton,
-    Link, useBreakpointValue,
+    useBreakpointValue,
     useDisclosure
 } from '@chakra-ui/react';
+import {Link} from '@chakra-ui/next-js'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -70,9 +71,10 @@ const Navbar: React.FC = () => {
                     <HStack display={{ base: 'none', lg: 'flex' }} align="center" gap={10}>
                         {[
                             { name: 'Services', href: '/services' },
-                            { name: 'Booking', href: '/booking' },
+                            { name: 'Gallery', href: '/gallery' },
                             { name: 'About Us', href: '/about' },
-                            { name: 'FAQs', href: '/faqs' }
+                            { name: 'FAQs', href: '/faqs' },
+                            { name: 'Blog', href: '/blog' }
                         ].map((item, index) => (
                             <Link _hover={{ textDecoration: 'none' }} fontSize={'larger'} key={index} href={item.href}
                                 color={pathname === item.href ? "blue.500" : "black"}>
@@ -85,27 +87,17 @@ const Navbar: React.FC = () => {
                             as="a"
                             size="lg"
                             href="!#"
-                            colorScheme='black'
-                            rel="noopener noreferrer"
-                        >Get Quote</Button>
-                        <Button
-                            as="a"
-                            size="lg"
-                            href="!#"
                             rel="noopener noreferrer"
                         >Contact Us</Button>
                     </HStack>
 
                     <HStack display={{ base: 'flex', lg: 'none' }} gap={5}>
-                        {/* <Icon as={FontAwesomeIcon} icon={faWhatsapp} color={{base: 'green.400', lg: "black"}} _hover={{
-                            color: '#25d366'
-                        }} boxSize={10} h='full'/> */}
                         <Button
                             as="a"
-                            size="lg"
+                            size="sm"
                             href="!#"
-                            variant={'outline'}
-                            rel="noopener noreferrer"
+                            // variant={'solid'}
+                            // rel="noopener noreferrer"
                         >Contact</Button>
                         <IconButton
 
