@@ -1,9 +1,9 @@
 "use client";
-
-import { Box, Container, Flex, Heading, Input, Text, Link, Divider, Button, Icon, VStack, HStack, Image } from '@chakra-ui/react';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, Image  } from '@chakra-ui/next-js';
+import { Box, Container, Divider, Flex, Heading, HStack, Icon, Text, VStack } from '@chakra-ui/react';
 import { faInstagram, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Facebook } from 'lucide-react';
 import React from 'react';
 
 const Footer: React.FC = () => {
@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
         <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between" align={{ base: 'start', lg: 'center' }} gap="8">
           {/* Logo and Description */}
           <Box >
-            <Image src="/logo-cropped.svg" alt="Car Care Logo"  maxW={300}/>
-            <Heading textAlign={'center'} as="h1" size="lg" fontFamily="Dancing Script">
+            <Image src="/logo-cropped.svg" alt="Car Care Logo" layout='responsive' width={200} height={100}/>
+            <Heading textAlign={{base: 'start', lg: 'center'}} as="h1" size="lg" fontFamily="Dancing Script">
               Car Care
             </Heading>
           </Box>
@@ -26,10 +26,10 @@ const Footer: React.FC = () => {
               <Heading as="h2" size="md" fontWeight="bold">
                 Company
               </Heading>
-              <Link href="#" fontSize="lg" fontWeight="10px" mt="2" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="#" fontSize="lg" fontWeight="10px" mt="2" _hover={{ textDecoration: 'underline' }}>
                 About Us
               </Link>
-              <Link href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
                 Services
               </Link>
             </VStack>
@@ -39,10 +39,10 @@ const Footer: React.FC = () => {
               <Heading as="h2" size="md" fontWeight="bold">
                 Support
               </Heading>
-              <Link href="#" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="#" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
                 Faqs
               </Link>
-              <Link href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
                 Booking
               </Link>
             </VStack>
@@ -52,10 +52,10 @@ const Footer: React.FC = () => {
               <Heading as="h2" size="md" fontWeight="bold">
                 Legal
               </Heading>
-              <Link href="#" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
+              <Link href="#" color='gray.300' fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
                 Privacy Policy
               </Link>
-              <Link href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+              <Link href="#" color='gray.300' fontSize="lg" _hover={{ textDecoration: 'underline' }}>
                 Terms Of Service
               </Link>
             </VStack>
@@ -70,12 +70,6 @@ const Footer: React.FC = () => {
           <Text fontSize="sm" mt="2">
               © {new Date().getFullYear()} care care. All rights reserved. Your trusted partner in car care solutions.
             </Text>
-            {/* <Link href="#" _hover={{ textDecoration: 'underline' }}>
-              Privacy Policy
-            </Link>
-            <Link href="#" _hover={{ textDecoration: 'underline' }}>
-              Terms Of Service
-            </Link> */}
           </Flex>
 
           {/* Social Media Icons */}

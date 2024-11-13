@@ -1,19 +1,24 @@
 "use client";
 
+import { Link } from '@chakra-ui/next-js';
 import {
-    Box, Button,
-    Container,
+    Box, Button, Container,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
     Flex,
-    Heading,
-    HStack,
-    IconButton,
-    useBreakpointValue,
-    useDisclosure
+    Heading, HStack, Icon, IconButton,
+    useBreakpointValue, useDisclosure,
+    VStack
 } from '@chakra-ui/react';
-import {Link} from '@chakra-ui/next-js'
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faWhatsapp, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Facebook } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -62,10 +67,10 @@ const Navbar: React.FC = () => {
 
                     align="center"
                     justify="space-between"
-                    padding={{ base: "1", md: "4" }}
+                    padding={{ base: "1", md: "2" }}
                     margin="0 auto"
                 >
-                    <Heading as="a" href="/" size="lg" fontFamily="Dancing Script" >
+                    <Heading color={pathname === '/' ? "blue.500" : "black"} as="a" href="/" size="lg" fontFamily="Dancing Script" >
                         Car Care
                     </Heading>
                     <HStack display={{ base: 'none', lg: 'flex' }} align="center" gap={10}>
@@ -85,7 +90,7 @@ const Navbar: React.FC = () => {
                     <HStack display={{ base: 'none', lg: 'flex' }}>
                         <Button
                             as="a"
-                            size="lg"
+                            size="md"
                             href="!#"
                             rel="noopener noreferrer"
                         >Contact Us</Button>
@@ -96,11 +101,8 @@ const Navbar: React.FC = () => {
                             as="a"
                             size="sm"
                             href="!#"
-                            // variant={'solid'}
-                            // rel="noopener noreferrer"
                         >Contact</Button>
                         <IconButton
-
                             aria-label="Open menu"
                             bg={'transparent'}
                             colorScheme='black'
@@ -111,6 +113,53 @@ const Navbar: React.FC = () => {
                     </HStack>
                 </Flex>
             </Container>
+            <Drawer
+                isOpen={isOpen}
+                placement='right'
+                size={'xs'}
+                onClose={onClose}
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader as={Heading}>Car Care</DrawerHeader>
+                    <DrawerBody>
+                        <VStack display={{ base: 'flex', lg: 'none' }} align="start" gap={8}>
+                            {[
+                                { name: 'Services', href: '/services' },
+                                { name: 'Gallery', href: '/gallery' },
+                                { name: 'About Us', href: '/about' },
+                                { name: 'FAQs', href: '/faqs' },
+                                { name: 'Blog', href: '/blog' }
+                            ].map((item, index) => (
+                                <Link _hover={{ textDecoration: 'none' }} fontSize={'larger'} key={index} href={item.href}
+                                    color={pathname === item.href ? "blue.500" : "black"}>
+                                    {item.name}
+                                </Link>
+                            ))}
+                        </VStack>
+                    </DrawerBody>
+                    <DrawerFooter>
+                        <HStack gap={8} alignItems={'center'} justifyContent={'end'}>
+                            <Link href="#" aria-label="Facebook" _hover={{ color: 'blue.500' }}>
+                                <Icon as={Facebook} boxSize="20px" mb={2} h='full' />
+                            </Link>
+
+                            <Link href="#" aria-label="Twitter" _hover={{ color: '#25d366' }}>
+                                <Icon as={FontAwesomeIcon} icon={faWhatsapp} boxSize="20px" h='full' />
+                            </Link>
+
+                            <Link href="#" aria-label="Instagram" _hover={{ color: 'pink.500' }}>
+                                <Icon as={FontAwesomeIcon} icon={faInstagram} boxSize="20px" h='full' />
+                            </Link>
+
+                            <Link href="#" aria-label="Twitter" _hover={{ color: 'blue.400' }}>
+                                <Icon as={FontAwesomeIcon} icon={faXTwitter} boxSize="20px" h='full' />
+                            </Link>
+                        </HStack>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
         </Box >
     );
 };

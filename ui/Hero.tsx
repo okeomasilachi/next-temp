@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Heading, Image, Text, Button, VStack } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 function Hero() {
@@ -51,17 +51,17 @@ function Hero() {
                 zIndex={1}
             />
             <VStack zIndex={2} spacing={6} color="white" px={6}>
-                <Heading size={{ base: "3xl", lg: "4xl" }} fontWeight="bold" >
+                <Heading size={{ base: "lg", lg: "2xl" }} fontWeight="bold" >
                     Experience Pristine Car Care
                 </Heading>
-                <Text fontSize="lg" maxW='700' >
+                <Text fontSize={{ base: "lg", lg: "2xl" }} maxW='700' >
                     Welcome to care care, where your vehicle receives the best treatment. Book your next wash online and enjoy our exceptional services. Our team is ready to assist you with all your car care needs.
                 </Text>
                 <Box display="flex" gap={4}>
-                    <Button borderRightColor="white" borderColor="white" borderBottomColor="white" colorScheme="blue" size="lg">
+                    <Button borderRightColor="white" borderColor="white" borderBottomColor="white" colorScheme="blue" size={{base: 'md', lg: "lg"}}>
                         Book Now
                     </Button>
-                    <Button colorScheme="white" size="lg" variant="outline">
+                    <Button colorScheme="white" size={{base: 'md', lg: "lg"}} variant="outline">
                         Learn More
                     </Button>
                 </Box>

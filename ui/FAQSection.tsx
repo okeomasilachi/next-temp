@@ -6,8 +6,8 @@ function FAQSection() {
         <Container mb={40} py={10} px={5} mx="auto">
             {/* FAQ Header */}
             <VStack spacing={4} textAlign="center" mb={10}>
-                <Heading size="xl">FAQs</Heading>
-                <Text fontSize="lg" color="gray.600">
+                <Heading size="lg">FAQs</Heading>
+                <Text fontSize="md" my={5} color="gray.600" mx='auto' maxW={400}>
                     Have questions about our services? Explore our FAQs to find answers to common inquiries and learn more about our car wash offerings.
                 </Text>
             </VStack>

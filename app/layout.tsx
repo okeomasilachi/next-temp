@@ -5,6 +5,9 @@ import { Providers } from "./providers";
 import Navbar from "@/ui/Navbar";
 import Footer from "@/ui/Footer";
 import { Dancing_Script } from 'next/font/google';
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
 
