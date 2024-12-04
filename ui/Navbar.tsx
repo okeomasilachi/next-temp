@@ -1,6 +1,7 @@
 "use client";
 
 import { Link } from '@chakra-ui/next-js';
+import NextLink from "next/link";
 import {
     Box, Button, Container,
     Drawer,
@@ -70,7 +71,7 @@ const Navbar: React.FC = () => {
                     padding={{ base: "1", md: "2" }}
                     margin="0 auto"
                 >
-                    <Heading color={pathname === '/' ? "blue.500" : "black"} as="a" href="/" size="lg" fontFamily="Dancing Script" >
+                    <Heading color={pathname === '/' ? "blue.500" : "black"} as="a" href="/" size="lg" fontFamily="'Dancing Script', cursive" >
                         Car Care
                     </Heading>
                     <HStack display={{ base: 'none', lg: 'flex' }} align="center" gap={10}>
@@ -81,7 +82,7 @@ const Navbar: React.FC = () => {
                             { name: 'FAQs', href: '/faqs' },
                             { name: 'Blog', href: '/blog' }
                         ].map((item, index) => (
-                            <Link _hover={{ textDecoration: 'none' }} fontSize={'larger'} key={index} href={item.href}
+                            <Link as={NextLink} _hover={{ textDecoration: 'none' }} fontSize={'large'} key={index} href={item.href}
                                 color={pathname === item.href ? "blue.500" : "black"}>
                                 {item.name}
                             </Link>

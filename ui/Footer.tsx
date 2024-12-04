@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           {/* Logo and Description */}
           <Box >
             <Image src="/logo-cropped.svg" alt="Car Care Logo" layout='responsive' width={200} height={100}/>
-            <Heading textAlign={{base: 'start', lg: 'center'}} as="h1" size="lg" fontFamily="Dancing Script">
+            <Heading textAlign={{base: 'start', lg: 'center'}} as="h1" size="lg" fontFamily="'Dancing Script', cursive">
               Car Care
             </Heading>
           </Box>
