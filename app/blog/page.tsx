@@ -42,13 +42,14 @@ import { useEffect } from "react";
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<null | []>(null);
   
   useEffect(() => {
     const fetchPosts = async () => {
+      setTimeout(() => {
+      }, 10000);
       const allPosts = await getAllPosts();
-      allPosts.length > 0 && setLoading(false) && setPosts(allPosts);
+        setPosts(allPosts);
     };
     fetchPosts();
   }, []);
@@ -104,30 +105,32 @@ export default function Blog() {
               </HStack>
           </Box>
           <Grid my={10} templateColumns={{ base: "1fr", sm: "1fr 1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr", xl: "1fr 1fr 1fr 1fr" }} gap={{base: 6, md: 8, xl: 10}}>
-          {loading
-          ? Array.from({ length: 5 }, (_, index) => (
-            <motion.div
+          {(posts === null || posts.length === 0)
+            && new Array(5).fill(null).map((_, index) => (
+              <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+              <Box 
+                  borderWidth={1}
+                  borderRadius="md"
+                  overflow="hidden"
+                  bg="white"
+                  h='full'
+                  boxShadow='lg'
+                  rounded='lg'
+                  padding='6'
                   key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
                 >
-            <Box 
-            borderWidth={1}
-                    borderRadius="md"
-                    overflow="hidden"
-                    bg="white"
-                    h='full'
-                    boxShadow='lg'
-                    padding='6' key={index}
-                    >
-              <Skeleton height='20px' />
-              <SkeletonText mt='4' noOfLines={2} spacing='4' skeletonHeight='2' />
-            </Box>
-            </motion.div>
-          ))
-          : 
-              filteredPosts.map((post) => (
+                <Skeleton height='200px' />
+                <SkeletonText mt='4' noOfLines={2} spacing='4' skeletonHeight='2' />
+              </Box>
+              </motion.div>
+            ))
+} 
+              {posts && filteredPosts?.map((post) => (
                 <motion.div
                   key={post.id}
                   initial={{ opacity: 0 }}
