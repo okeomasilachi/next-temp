@@ -50,7 +50,6 @@ const Navbar: React.FC = () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-
     return (
         <Box
             backdropFilter="blur(10px)"
@@ -65,7 +64,6 @@ const Navbar: React.FC = () => {
         >
             <Container>
                 <Flex
-
                     align="center"
                     justify="space-between"
                     padding={{ base: "1", md: "2" }}
@@ -96,7 +94,6 @@ const Navbar: React.FC = () => {
                             rel="noopener noreferrer"
                         >Contact Us</Button>
                     </HStack>
-
                     <HStack display={{ base: 'flex', lg: 'none' }} gap={5}>
                         <Button
                             as="a"
@@ -145,15 +142,12 @@ const Navbar: React.FC = () => {
                             <Link href="#" aria-label="Facebook" _hover={{ color: 'blue.500' }}>
                                 <Icon as={Facebook} boxSize="20px" mb={2} h='full' />
                             </Link>
-
                             <Link href="#" aria-label="Twitter" _hover={{ color: '#25d366' }}>
                                 <Icon as={FontAwesomeIcon} icon={faWhatsapp} boxSize="20px" h='full' />
                             </Link>
-
                             <Link href="#" aria-label="Instagram" _hover={{ color: 'pink.500' }}>
                                 <Icon as={FontAwesomeIcon} icon={faInstagram} boxSize="20px" h='full' />
                             </Link>
-
                             <Link href="#" aria-label="Twitter" _hover={{ color: 'blue.400' }}>
                                 <Icon as={FontAwesomeIcon} icon={faXTwitter} boxSize="20px" h='full' />
                             </Link>

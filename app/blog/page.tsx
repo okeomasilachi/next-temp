@@ -1,169 +1,143 @@
 "use client";
 
+import { getAllPosts } from "@/utils/blogHandler";
 import {
   Box,
   Button,
+  Container,
   Grid,
   Heading,
-  Text,
-  Link,
-  Input,
-  FormControl,
-  FormLabel,
-  Textarea,
-  IconButton,
-  useColorMode,
+  HStack,
   Image,
-  SimpleGrid,
-  List,
-  ListItem,
+  Link,
+  Tag,
+  Text
 } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon, faShareAlt } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faTwitter, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-// Mock data
-const posts = [
-  { id: 1, title: "Top 5 Car Wash Tips", excerpt: "Learn how to maintain your car’s shine...", image: "/car1.jpg" },
-  { id: 2, title: "The Benefits of Regular Car Washes", excerpt: "Regular washes can extend your car’s life...", image: "/car2.jpg" },
-];
-
 const categories = [
-  { id: 1, name: "Car Maintenance", slug: "car-maintenance" },
-  { id: 2, name: "DIY Car Care", slug: "diy-car-care" },
+  { id: 0, name: "All Categories", slug: "all" },
+  { id: 1, name: "Interior Vacuuming", slug: "interior-vacuuming" },
+  { id: 2, name: "Boot Detailing", slug: "boot-detailing" },
+  { id: 3, name: "AC / Vent Steaming", slug: "ac-vent-steaming" },
+  { id: 4, name: "Leather Washing & Conditioning", slug: "leather-washing-conditioning" },
+  { id: 5, name: "Fabric Washing", slug: "fabric-washing" },
+  { id: 6, name: "Roof Cleaning", slug: "roof-cleaning" },
+  { id: 7, name: "Door Jamb Cleaning", slug: "door-jamb-cleaning" },
+  { id: 8, name: "Dashboard Shine", slug: "dashboard-shine" },
+  { id: 9, name: "Engine Detailing", slug: "engine-detailing" },
+  { id: 10, name: "Exterior Washing with Snow Foam", slug: "exterior-washing-snow-foam" },
+  { id: 11, name: "Rim & Tyre Shine", slug: "rim-tyre-shine" },
+  { id: 12, name: "Seat Belt Washing", slug: "seat-belt-washing" },
+  { id: 13, name: "Machine Buffing", slug: "machine-buffing" },
+  { id: 14, name: "Interior Trim Restoration", slug: "interior-trim-restoration" },
+  { id: 15, name: "Exterior Trim Restoration", slug: "exterior-trim-restoration" },
+  { id: 16, name: "Ceramic Coating", slug: "ceramic-coating" },
 ];
 
-const testimonials = [
-  { id: 1, name: "John Doe", text: "Fantastic service! My car has never looked better." },
-  { id: 2, name: "Jane Smith", text: "Quick, convenient, and thorough. Highly recommend!" },
-];
+import { useEffect } from "react";
 
 export default function Blog() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const [comment, setComment] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const allPosts = await getAllPosts();
+      allPosts.length > 0 && setLoading(false) && setPosts(allPosts);
+    };
+    fetchPosts();
+  }, []);
+
+  // Filter posts based on the selected category
+  const filteredPosts =
+    selectedCategory === "All Categories"
+      ? posts
+      : posts.filter((post) => post.categories.includes(selectedCategory));
 
   return (
-    <Box bg={colorMode === "light" ? "gray.100" : "gray.900"} minH="100vh" color={colorMode === "light" ? "black" : "white"}>
+    <Box
+      minH="100vh"
+      color='black'
+    >
       {/* Header Section */}
-      <Box as="header" bg="teal.500" py={6} textAlign="center">
+      <Box as="header" bg="blue.800" py={20} textAlign="center">
         <Heading color="white">Expert Car Care Tips & Updates</Heading>
-        <Text color="whiteAlpha.800" mt={2}>Discover the best ways to maintain your car’s cleanliness and value.</Text>
-        <Button mt={4} colorScheme="orange" as="a" href="/booking">Book a Wash</Button>
-        <IconButton
-          aria-label="Toggle Theme"
-          icon={<FontAwesomeIcon icon={colorMode === "light" ? faMoon : faSun} />}
-          onClick={toggleColorMode}
-          position="absolute"
-          top={4}
-          right={4}
-          colorScheme="teal"
-        />
+        <Text color="whiteAlpha.800" mt={2}>
+          Discover the best ways to maintain your car’s cleanliness and value.
+        </Text>
+        <Button mt={4} bg="white" color="blue.800" _hover={{ color: "white", bg: "blue.500"}} as="a" href="/booking">
+          Book a Wash
+        </Button>
       </Box>
 
       {/* Main Content */}
-      <Box p={4}>
-        {/* Blog Posts Grid */}
-        <Grid templateColumns={{ base: "1fr", md: "2fr 1fr" }} gap={6}>
+      <Container py={10}>
           <Box>
-            <Heading size="lg" mb={4}>Recent Posts</Heading>
-            <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6}>
-              {posts.map((post) => (
-                <motion.div key={post.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                  <Box borderWidth={1} borderRadius="md" overflow="hidden" bg="white" _dark={{ bg: "gray.700" }}>
+            <Heading size="lg" mb={4}>{selectedCategory}</Heading>
+            <Box p={4} borderRadius="md" bg="gray.50" >
+              <Heading size="sm" mb={5}>Categories</Heading>
+              <HStack wrap="wrap" gap={4}>
+                {categories.map((category) => (
+                  <Tag
+                    px={2}
+                    py={1}
+                    borderRadius='full'
+                    variant='outline'
+                    colorScheme='blue'
+                    key={category.id}
+                    _hover={{
+                      bg: selectedCategory !== category.name ? 'blue.400' : '',
+                    }}
+                    bg={selectedCategory === category.name ? "blue.800" : ""}
+                    cursor="pointer"
+                    onClick={() => setSelectedCategory(category.name)}
+                    color={selectedCategory === category.name ? "white" : "black"}
+                  >
+                      {category.name}
+                  </Tag>
+                ))}
+              </HStack>
+          </Box>
+          {loading
+          ? {Array.from({ length: 5 }, (_, index) => (
+            <div key={index}>Iteration {index + 1}</div>
+          ))}
+          : 
+            (<Grid my={10} templateColumns={{ base: "1fr", sm: "1fr 1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr", xl: "1fr 1fr 1fr 1fr" }} gap={{base: 6, md: 8, xl: 10}}>
+              {filteredPosts.map((post) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Box
+                    onClick={() => window.location.href = `/blog/${post.id}`}
+                    cursor={'pointer'}
+                    borderWidth={1}
+                    borderRadius="md"
+                    overflow="hidden"
+                    bg="white"
+                    h='full'
+                    boxShadow='lg'
+                  >
                     <Image src={post.image} alt={post.title} />
                     <Box p={4}>
-                      <Heading size="md">{post.title}</Heading>
-                      <Text noOfLines={2} mt={2}>{post.excerpt}</Text>
-                      <Link color="teal.500" href={`/post/${post.id}`} mt={4}>Read More</Link>
-
-                      {/* Social Sharing Buttons */}
-                      <Box mt={4}>
-                        <Text fontWeight="bold">Share this post:</Text>
-                        <Box display="flex" gap={2} mt={2}>
-                          <IconButton
-                            as="a"
-                            href="https://facebook.com"
-                            aria-label="Share on Facebook"
-                            icon={<FontAwesomeIcon icon={faFacebook} />}
-                            colorScheme="facebook"
-                          />
-                          <IconButton
-                            as="a"
-                            href="https://twitter.com"
-                            aria-label="Share on Twitter"
-                            icon={<FontAwesomeIcon icon={faTwitter} />}
-                            colorScheme="twitter"
-                          />
-                          <IconButton
-                            as="a"
-                            href="https://instagram.com"
-                            aria-label="Share on Instagram"
-                            icon={<FontAwesomeIcon icon={faInstagram} />}
-                            colorScheme="pink"
-                          />
-                          <IconButton
-                            as="a"
-                            href="https://whatsapp.com"
-                            aria-label="Share on WhatsApp"
-                            icon={<FontAwesomeIcon icon={faWhatsapp} />}
-                            colorScheme="whatsapp"
-                          />
-                        </Box>
-                      </Box>
+                      <Heading size="md" mb={4} noOfLines={2}>{post.title}</Heading>
+                      <Link color="blue.500" mt={5} href={`/blog/${post.id}`} mt={4}>
+                        Read More
+                      </Link>
                     </Box>
                   </Box>
                 </motion.div>
               ))}
-            </Grid>
+            </Grid>)
+          }
           </Box>
-
-          {/* Sidebar */}
-          <Box as="aside">
-            <Box p={4} borderRadius="md" bg="gray.50" _dark={{ bg: "gray.800" }}>
-              <Heading size="sm">Categories</Heading>
-              <List mt={2}>
-                {categories.map((category) => (
-                  <ListItem key={category.id}>
-                    <Link href={`/category/${category.slug}`} color="teal.500">{category.name}</Link>
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-
-            <Box p={4} mt={8} borderRadius="md" bg="gray.50" _dark={{ bg: "gray.800" }}>
-              <Heading size="sm" mb={4}>What Our Customers Are Saying</Heading>
-              <SimpleGrid columns={{ base: 1 }} spacing={4}>
-                {testimonials.map((testimonial) => (
-                  <Box key={testimonial.id} p={4} borderWidth={1} borderRadius="md" bg="white" _dark={{ bg: "gray.700" }}>
-                    <Text fontStyle="italic">"{testimonial.text}"</Text>
-                    <Text fontWeight="bold" mt={2} textAlign="right">- {testimonial.name}</Text>
-                  </Box>
-                ))}
-              </SimpleGrid>
-            </Box>
-          </Box>
-        </Grid>
-
-        {/* Comment Section */}
-        <Box mt={8} p={4} borderRadius="md" bg="gray.50" _dark={{ bg: "gray.800" }}>
-          <Heading size="md" mb={4}>Leave a Comment</Heading>
-          <FormControl id="name">
-            <FormLabel>Name</FormLabel>
-            <Input placeholder="Your Name" />
-          </FormControl>
-          <FormControl id="comment" mt={4}>
-            <FormLabel>Comment</FormLabel>
-            <Textarea
-              placeholder="Your Comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-          </FormControl>
-          <Button mt={4} colorScheme="teal">Post Comment</Button>
-        </Box>
-      </Box>
+      </Container>
     </Box>
   );
 }
