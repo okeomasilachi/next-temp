@@ -1,6 +1,5 @@
 "use client";
 
-import { getPostById } from "@/utils/blogHandler";
 import {
     Box,
     Button,
@@ -13,6 +12,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import {fetchPostById} from '@/app/actions';
 
 export default function Blog() {
     const [posts, setPosts] = useState(null);
@@ -21,7 +21,7 @@ export default function Blog() {
     console.log(params);
     useEffect(() => {
         const fetchPosts = async () => {
-          const post = await getPostById(Number(params.postId));
+          const post = await fetchPostById(Number(params.postId));
           console.log(post);
           setPosts(post);
         };

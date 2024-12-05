@@ -1,6 +1,5 @@
 "use client";
 
-import { getAllPosts } from "@/utils/blogHandler";
 import {
   Box,
   Button,
@@ -17,6 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useEffect } from "react";
+import { fetchAllPosts } from "@/app/actions";
 
 const categories = [
   { id: 0, name: "All Categories", slug: "all" },
@@ -38,7 +39,6 @@ const categories = [
   { id: 16, name: "Ceramic Coating", slug: "ceramic-coating" },
 ];
 
-import { useEffect } from "react";
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
@@ -48,7 +48,7 @@ export default function Blog() {
     const fetchPosts = async () => {
       setTimeout(() => {
       }, 10000);
-      const allPosts = await getAllPosts();
+      const allPosts = await fetchAllPosts();
         setPosts(allPosts);
     };
     fetchPosts();
@@ -130,7 +130,7 @@ export default function Blog() {
               </motion.div>
             ))
 } 
-              {posts && filteredPosts?.map((post) => (
+              {posts?.length > 0 && filteredPosts?.map((post) => (
                 <motion.div
                   key={post.id}
                   initial={{ opacity: 0 }}

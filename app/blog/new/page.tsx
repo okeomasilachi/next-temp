@@ -84,7 +84,6 @@ const CreatePostForm = () => {
 
     try {
       const result = await createPost({
-        id: Date.now(), // Assuming you need an ID
         title: formData.title,
         categories: formData.categories,
         excerpt: formData.excerpt,
