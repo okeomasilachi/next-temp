@@ -10,6 +10,8 @@ import {
   HStack,
   Image,
   Link,
+  Skeleton,
+  SkeletonText,
   Tag,
   Text
 } from "@chakra-ui/react";
@@ -101,13 +103,31 @@ export default function Blog() {
                 ))}
               </HStack>
           </Box>
+          <Grid my={10} templateColumns={{ base: "1fr", sm: "1fr 1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr", xl: "1fr 1fr 1fr 1fr" }} gap={{base: 6, md: 8, xl: 10}}>
           {loading
-          ? {Array.from({ length: 5 }, (_, index) => (
-            <div key={index}>Iteration {index + 1}</div>
-          ))}
+          ? Array.from({ length: 5 }, (_, index) => (
+            <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+            <Box 
+            borderWidth={1}
+                    borderRadius="md"
+                    overflow="hidden"
+                    bg="white"
+                    h='full'
+                    boxShadow='lg'
+                    padding='6' key={index}
+                    >
+              <Skeleton height='20px' />
+              <SkeletonText mt='4' noOfLines={2} spacing='4' skeletonHeight='2' />
+            </Box>
+            </motion.div>
+          ))
           : 
-            (<Grid my={10} templateColumns={{ base: "1fr", sm: "1fr 1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr", xl: "1fr 1fr 1fr 1fr" }} gap={{base: 6, md: 8, xl: 10}}>
-              {filteredPosts.map((post) => (
+              filteredPosts.map((post) => (
                 <motion.div
                   key={post.id}
                   initial={{ opacity: 0 }}
@@ -133,9 +153,9 @@ export default function Blog() {
                     </Box>
                   </Box>
                 </motion.div>
-              ))}
-            </Grid>)
-          }
+              ))
+            }
+            </Grid>
           </Box>
       </Container>
     </Box>
