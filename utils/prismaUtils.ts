@@ -1,3 +1,4 @@
+
 import { PrismaClient } from '@prisma/client';
 
 declare global {
@@ -24,10 +25,22 @@ export async function getAllPosts() {
   }
 }
 
+export async function addCommentToPost({ postId, content }: { postId: string; content: string }) {
+  // Replace this with your actual Prisma query
+  return await prisma.comment.create({
+    data: {
+      content,
+      postId: Number(postId),
+    },
+  });
+}
+
+
 export async function getPostById(id: number) {
   try {
     return await prisma.post.findUnique({
-      where: { id }
+      where: { id },
+      include: { comments: true },
     });
   } catch (error) {
     console.error(`Error fetching post with id ${id}:`, error);

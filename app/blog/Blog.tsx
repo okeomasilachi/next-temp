@@ -118,7 +118,7 @@ export default function Blog() {
                 ))}
               </HStack>
           </Box>
-          <Grid my={10} templateColumns={{ base: "1fr", sm: "1fr 1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr", xl: "1fr 1fr 1fr 1fr" }} gap={{base: 6, md: 8, xl: 10}}>
+          <Grid my={10} templateColumns={{ base: "1fr", sm: "1fr 1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr"}} gap={{base: 6, md: 8, xl: 10}}>
           {(posts === null || posts.length === 0)
             && new Array(5).fill(null).map((_, index) => (
               <motion.div

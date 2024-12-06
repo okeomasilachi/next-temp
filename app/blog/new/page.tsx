@@ -1,22 +1,28 @@
 "use client";
 
-import { useState } from "react";
 import { createPost } from "@/app/actions";
 import {
+  Badge,
   Box,
-  Heading,
-  Input,
+  Button,
+  Center,
   FormControl,
   FormLabel,
-  Checkbox,
-  Button,
-  Text,
-  Center,
+  Heading,
   HStack,
-  Badge,
+  Input,
+  Text
 } from "@chakra-ui/react";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+
+const ReactQuill = dynamic(() => import('react-quill'), { 
+  ssr: false,
+  loading: () => <p>Loading editor...</p>
+});
 
 // Service categories derived from titles
 const servicesData = [
@@ -41,7 +47,7 @@ const servicesData = [
 const CreatePostForm = () => {
   const [formData, setFormData] = useState({
     title: "",
-    categories: [] as string[], // Array for selected categories
+    categories: [] as string[],
     excerpt: "",
     image: "",
   });
