@@ -1,5 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 
+declare global {
+  var prisma: PrismaClient | undefined;
+}
+
 // PrismaClient is attached to the `global` object in development to prevent
 // a new instance from being created with every module reload.
 const prisma = global.prisma || new PrismaClient();
@@ -127,7 +131,7 @@ export async function deletePost(id: number) {
     console.error(`Error deleting post with id ${id}:`, error);
     return { 
       success: false, 
-      message: error.message as string || "Post not found or delete failed." 
+      message: error instanceof Error ? error.message : "Post not found or delete failed." 
     };
   }
 }

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-export const aboutMetadata: Metadata = {
+export const metadata: Metadata = {
   title: "About Us | CARCARE Mobile Carwash",
   description:
     "Professional mobile car wash service in Eliozu. Learn about our commitment to quality, our experienced team, and our comprehensive auto detailing services.",
@@ -28,7 +28,7 @@ export const aboutMetadata: Metadata = {
     "car cleaning professionals",
   ],
   alternates: {
-    canonical: "https://www.carcaremobilecarwash.com/about", // Replace with your actual domain
+    canonical: "https://www.carcaremobilecarwash.com/about",
   },
 };
 

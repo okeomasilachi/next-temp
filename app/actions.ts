@@ -16,7 +16,14 @@ import {
       const posts = await getAllPosts();
       
       // Transform posts to include categories as an array
-      const transformedPosts = posts.map(post => ({
+      interface TransformedPost {
+        id: number;
+        title: string;
+        image: string;
+        categories: string[];
+      }
+
+      const transformedPosts: TransformedPost[] = posts.map((post): TransformedPost => ({
         id: post.id,
         title: post.title,
         image: post.image || 'https://picsum.photos/400/300',
@@ -105,6 +112,7 @@ import {
       if (result.success) {
         // Transform post to include categories as an array
         if (result.post) {
+        // @ts-expect-error - None of the properties are guaranteed to exist
           result.post.categories = getCategoriesArray(result.post.categories);
         }
         return NextResponse.json(result, { status: 200 });

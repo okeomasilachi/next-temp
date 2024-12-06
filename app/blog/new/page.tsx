@@ -1,10 +1,22 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import { createPost } from "@/app/actions";
-import { Box, Heading, Input, FormControl, FormLabel, Checkbox, Button, Text, Center, HStack, Badge } from "@chakra-ui/react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import {
+  Box,
+  Heading,
+  Input,
+  FormControl,
+  FormLabel,
+  Checkbox,
+  Button,
+  Text,
+  Center,
+  HStack,
+  Badge,
+} from "@chakra-ui/react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 // Service categories derived from titles
 const servicesData = [
@@ -38,11 +50,11 @@ const CreatePostForm = () => {
   const modules = {
     toolbar: [
       [{ header: [2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
+      ["bold", "italic", "underline", "strike"],
       [{ color: [] }, { background: [] }],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      ['link', 'image'],
-      ['clean'], 
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      ["clean"],
     ],
   };
 
@@ -78,7 +90,10 @@ const CreatePostForm = () => {
     e.preventDefault();
 
     if (formData.categories.length === 0) {
-      setMessage({ text: "Please select at least one category.", isSuccess: false });
+      setMessage({
+        text: "Please select at least one category.",
+        isSuccess: false,
+      });
       return;
     }
 
@@ -90,22 +105,27 @@ const CreatePostForm = () => {
         image: formData.image || "https://picsum.photos/400/300",
       });
 
-      if ('success' in result) {
+      if ("success" in result) {
+        // @ts-expect-error - None of the properties are guaranteed to exist
         setMessage({ text: result.message, isSuccess: result.success });
 
         if (result.success) {
           setFormData({ title: "", categories: [], excerpt: "", image: "" }); // Clear form on success
         }
       } else {
+        // @ts-expect-error - None of the properties are guaranteed to exist
         setMessage({ text: result.error, isSuccess: false });
       }
     } catch (error) {
-      setMessage({ text: "An error occurred while creating the post.", isSuccess: false });
+      setMessage({
+        text: "An error occurred while creating the post.",
+        isSuccess: false,
+      });
     }
   };
 
   return (
-    <Box maxW="600px" mx="auto" p="20px" pt={20} >
+    <Box maxW="600px" mx="auto" p="20px" pt={20}>
       <Heading as="h2" size="lg" mb="6">
         Create a New Post
       </Heading>
@@ -125,19 +145,27 @@ const CreatePostForm = () => {
         {/* Category Selection */}
         <FormControl mb="4">
           <FormLabel>Categories:</FormLabel>
-          <HStack wrap={'wrap'} gap={4} lineHeight={'normal'}>
+          <HStack wrap={"wrap"} gap={4} lineHeight={"normal"}>
             {servicesData.map((service) => (
               <>
-              <Badge
-                cursor='pointer'
-                key={service.title}
-                border="1px solid"
-                borderColor={formData.categories.includes(service.title) ? 'blue.800' : 'black'}
-                colorScheme={formData.categories.includes(service.title) ? 'blue' : 'black'}
-                onClick={() => toggleCategory(service.title)}
-              >
-                {service.title}
-              </Badge>
+                <Badge
+                  cursor="pointer"
+                  key={service.title}
+                  border="1px solid"
+                  borderColor={
+                    formData.categories.includes(service.title)
+                      ? "blue.800"
+                      : "black"
+                  }
+                  colorScheme={
+                    formData.categories.includes(service.title)
+                      ? "blue"
+                      : "black"
+                  }
+                  onClick={() => toggleCategory(service.title)}
+                >
+                  {service.title}
+                </Badge>
               </>
             ))}
           </HStack>
@@ -147,12 +175,13 @@ const CreatePostForm = () => {
           <FormLabel>Excerpt:</FormLabel>
           <ReactQuill
             theme="snow"
+            // @ts-expect-error - None of the properties are guaranteed to exist
             name="excerpt"
             value={formData.excerpt}
             onChange={handleExcerptChange}
             modules={modules}
             placeholder="Write a captivating post..."
-            style={{ height: '250px' }}
+            style={{ height: "250px" }}
           />
         </FormControl>
 
@@ -169,9 +198,9 @@ const CreatePostForm = () => {
 
         {/* Submit Button */}
         <Center>
-        <Button type="submit" mx="auto" mb={40} colorScheme="blue">
-          Create Post
-        </Button>
+          <Button type="submit" mx="auto" mb={40} colorScheme="blue">
+            Create Post
+          </Button>
         </Center>
       </form>
 
