@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { createPost } from "@/app/actions";
-import { Box, Heading, Input, FormControl, FormLabel, Checkbox, Button, Text, Center, HStack } from "@chakra-ui/react";
+import { Box, Heading, Input, FormControl, FormLabel, Checkbox, Button, Text, Center, HStack, Badge } from "@chakra-ui/react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -87,7 +87,7 @@ const CreatePostForm = () => {
         title: formData.title,
         categories: formData.categories,
         excerpt: formData.excerpt,
-        image: formData.image || "https://picsum.photos/400/300", // Default image if empty
+        image: formData.image || "https://picsum.photos/400/300",
       });
 
       if ('success' in result) {
@@ -105,7 +105,7 @@ const CreatePostForm = () => {
   };
 
   return (
-    <Box maxW="600px" mx="auto" p="20px" pt={20}>
+    <Box maxW="600px" mx="auto" p="20px" pt={20} >
       <Heading as="h2" size="lg" mb="6">
         Create a New Post
       </Heading>
@@ -127,28 +127,32 @@ const CreatePostForm = () => {
           <FormLabel>Categories:</FormLabel>
           <HStack wrap={'wrap'} gap={4} lineHeight={'normal'}>
             {servicesData.map((service) => (
-              <Checkbox
+              <>
+              <Badge
+                cursor='pointer'
                 key={service.title}
-                isChecked={formData.categories.includes(service.title)}
-                onChange={() => toggleCategory(service.title)}
+                border="1px solid"
+                borderColor={formData.categories.includes(service.title) ? 'blue.800' : 'black'}
+                colorScheme={formData.categories.includes(service.title) ? 'blue' : 'black'}
+                onClick={() => toggleCategory(service.title)}
               >
                 {service.title}
-              </Checkbox>
+              </Badge>
+              </>
             ))}
           </HStack>
         </FormControl>
 
-        {/* Excerpt Input (React Quill) */}
         <FormControl mb="4" isRequired>
           <FormLabel>Excerpt:</FormLabel>
           <ReactQuill
             theme="snow"
             name="excerpt"
             value={formData.excerpt}
-            onChange={handleExcerptChange}  // Using handleExcerptChange
+            onChange={handleExcerptChange}
             modules={modules}
             placeholder="Write a captivating post..."
-            style={{ height: '250px' }}  // Adjust height as needed
+            style={{ height: '250px' }}
           />
         </FormControl>
 

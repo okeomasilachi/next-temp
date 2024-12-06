@@ -1,3 +1,5 @@
+'use server';
+
 import { 
     getAllPosts, 
     getPostById, 
@@ -12,14 +14,25 @@ import {
   export async function fetchAllPosts() {
     try {
       const posts = await getAllPosts();
+      
       // Transform posts to include categories as an array
       const transformedPosts = posts.map(post => ({
-        ...post,
-        categories: getCategoriesArray(post.categories)
+        id: post.id,
+        title: post.title,
+        image: post.image || 'https://picsum.photos/400/300',
+        categories: getCategoriesArray(post.categories || '')
       }));
-      return NextResponse.json(transformedPosts, { status: 200 });
+  
+      return {
+        success: true,
+        posts: transformedPosts
+      };
     } catch (error) {
-      return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 });
+      console.error("Error fetching posts:", error);
+      return { 
+        success: false, 
+        error: 'Failed to fetch posts' 
+      };
     }
   }
   
@@ -29,14 +42,13 @@ import {
       const post = await getPostById(Number(id));
       if (post) {
         // Transform post to include categories as an array
-        const transformedPost = {
+        return {
           ...post,
-          categories: getCategoriesArray(post.categories)
+          categories: post.categories ? post.categories.split(',') : []
         };
-        return NextResponse.json(transformedPost, { status: 200 });
-      } else {
-        return NextResponse.json({ error: 'Post not found' }, { status: 404 });
-      }
+      } 
+      
+      return null;
     } catch (error) {
       return NextResponse.json({ error: 'Failed to fetch post' }, { status: 500 });
     }
@@ -50,18 +62,33 @@ import {
     image?: string 
   }) {
     try {
-      const result = await addPost(newPost);
+      // Ensure categories are always converted to a comma-separated string
+      const categoriesString = newPost.categories 
+        ? newPost.categories.join(',') 
+        : '';
+  
+      const result = await addPost({
+        ...newPost,
+        categories: categoriesString
+      });
+  
       if (result.success) {
-        // Transform post to include categories as an array
-        if (result.post) {
-          result.post.categories = getCategoriesArray(result.post.categories);
-        }
-        return NextResponse.json(result, { status: 201 });
+        return { 
+          success: true, 
+          message: result.message,
+          post: result.post
+        };
       } else {
-        return NextResponse.json(result, { status: 400 });
+        return { 
+          success: false, 
+          message: result.message 
+        };
       }
     } catch (error) {
-      return NextResponse.json({ error: 'Failed to add post' }, { status: 500 });
+      return { 
+        error: 'Failed to add post',
+        success: false
+      };
     }
   }
   

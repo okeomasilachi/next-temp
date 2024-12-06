@@ -6,6 +6,7 @@ const prisma = global.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
+
 export async function getAllPosts() {
   try {
     return await prisma.post.findMany({
@@ -32,7 +33,7 @@ export async function getPostById(id: number) {
 
 export async function addPost(newPost: {
   title: string,
-  categories?: string[] | string,
+  categories?: string,
   excerpt?: string,
   image?: string
 }) {
@@ -44,17 +45,12 @@ export async function addPost(newPost: {
       };
     }
 
-    // Convert categories array to comma-separated string if needed
-    const categoriesString = Array.isArray(newPost.categories) 
-      ? newPost.categories.join(',') 
-      : newPost.categories;
-
     const post = await prisma.post.create({
       data: {
         title: newPost.title,
-        categories: categoriesString,
+        categories: newPost.categories || '',
         excerpt: newPost.excerpt,
-        image: newPost.image
+        image: newPost.image || 'https://picsum.photos/400/300'
       }
     });
 
@@ -67,7 +63,7 @@ export async function addPost(newPost: {
     console.error("Error adding post:", error);
     return { 
       success: false, 
-      message: "Failed to add post." 
+      message: error instanceof Error ? error.message : "Failed to add post." 
     };
   }
 }
@@ -131,7 +127,7 @@ export async function deletePost(id: number) {
     console.error(`Error deleting post with id ${id}:`, error);
     return { 
       success: false, 
-      message: "Post not found or delete failed." 
+      message: error.message as string || "Post not found or delete failed." 
     };
   }
 }

@@ -19,6 +19,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchAllPosts } from "@/app/actions";
 
+interface Post {
+  id: string;
+  title: string;
+  image: string;
+  categories: string[];
+}
+
 const categories = [
   { id: 0, name: "All Categories", slug: "all" },
   { id: 1, name: "Interior Vacuuming", slug: "interior-vacuuming" },
@@ -34,23 +41,31 @@ const categories = [
   { id: 11, name: "Rim & Tyre Shine", slug: "rim-tyre-shine" },
   { id: 12, name: "Seat Belt Washing", slug: "seat-belt-washing" },
   { id: 13, name: "Machine Buffing", slug: "machine-buffing" },
-  { id: 14, name: "Interior Trim Restoration", slug: "interior-trim-restoration" },
-  { id: 15, name: "Exterior Trim Restoration", slug: "exterior-trim-restoration" },
   { id: 16, name: "Ceramic Coating", slug: "ceramic-coating" },
 ];
 
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [posts, setPosts] = useState<null | []>(null);
+  const [posts, setPosts] = useState<Post[] | null>(null);
   
   useEffect(() => {
     const fetchPosts = async () => {
-      setTimeout(() => {
-      }, 10000);
-      const allPosts = await fetchAllPosts();
-        setPosts(allPosts);
+      try {
+        const response = await fetchAllPosts();
+        
+        if (response.success && response.posts) {
+          setPosts(response.posts);
+        } else {
+          console.error("Failed to fetch posts:", response.error);
+          setPosts([]);
+        }
+      } catch (error) {
+        console.error("Error in fetching posts:", error);
+        setPosts([]);
+      }
     };
+    
     fetchPosts();
   }, []);
 
@@ -58,7 +73,7 @@ export default function Blog() {
   const filteredPosts =
     selectedCategory === "All Categories"
       ? posts
-      : posts.filter((post) => post.categories.includes(selectedCategory));
+      : posts?.filter((post) => post.categories.includes(selectedCategory)) || null;
 
   return (
     <Box
@@ -92,7 +107,7 @@ export default function Blog() {
                     colorScheme='blue'
                     key={category.id}
                     _hover={{
-                      bg: selectedCategory !== category.name ? 'blue.400' : '',
+                      bg: selectedCategory !== category.name ? 'blue.100' : '',
                     }}
                     bg={selectedCategory === category.name ? "blue.800" : ""}
                     cursor="pointer"
@@ -128,9 +143,8 @@ export default function Blog() {
                 <SkeletonText mt='4' noOfLines={2} spacing='4' skeletonHeight='2' />
               </Box>
               </motion.div>
-            ))
-} 
-              {posts?.length > 0 && filteredPosts?.map((post) => (
+            ))}
+              {posts && posts.length > 0 && filteredPosts?.map((post) => (
                 <motion.div
                   key={post.id}
                   initial={{ opacity: 0 }}
@@ -147,10 +161,10 @@ export default function Blog() {
                     h='full'
                     boxShadow='lg'
                   >
-                    <Image src={post.image} alt={post.title} />
+                    <Image src={post.image} alt={post.title} h={300} w='full'/>
                     <Box p={4}>
                       <Heading size="md" mb={4} noOfLines={2}>{post.title}</Heading>
-                      <Link color="blue.500" mt={5} href={`/blog/${post.id}`} mt={4}>
+                      <Link color="blue.500" mt={5} href={`/blog/${post.id}`}>
                         Read More
                       </Link>
                     </Box>
