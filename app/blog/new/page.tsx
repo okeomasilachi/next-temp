@@ -11,9 +11,11 @@ import {
   Heading,
   HStack,
   Input,
+  useToast,
   Text
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import React from "react";
 import { useState } from "react";
 // import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -52,7 +54,8 @@ const CreatePostForm = () => {
     image: "",
   });
   const [message, setMessage] = useState({ text: "", isSuccess: false });
-
+  const toast = useToast();
+  
   const modules = {
     toolbar: [
       [{ header: [2, 3, 4, 5, 6, false] }],
@@ -96,9 +99,12 @@ const CreatePostForm = () => {
     e.preventDefault();
 
     if (formData.categories.length === 0) {
-      setMessage({
-        text: "Please select at least one category.",
-        isSuccess: false,
+      toast({
+        title: 'No Category selected.',
+        description: "Please select at least one category.",
+        status: 'warning',
+        duration: 9000,
+        isClosable: true,
       });
       return;
     }
@@ -108,25 +114,35 @@ const CreatePostForm = () => {
         title: formData.title,
         categories: formData.categories,
         excerpt: formData.excerpt,
-        image: formData.image || "https://picsum.photos/400/300",
+        image: formData.image || "/logo.svg",
       });
 
       if ("success" in result) {
-        // @ts-expect-error - None of the properties are guaranteed to exist
-        setMessage({ text: result.message, isSuccess: result.success });
-
+        toast({
+          title: result.message,
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
         if (result.success) {
           setFormData({ title: "", categories: [], excerpt: "", image: "" }); // Clear form on success
         }
       } else {
-        // @ts-expect-error - None of the properties are guaranteed to exist
-        setMessage({ text: result.error, isSuccess: false });
+        toast({
+        // @ts-ignore
+          title: result.error as string,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
       }
     } catch (error) {
-      setMessage({
-        text: "An error occurred while creating the post.",
-        isSuccess: false,
-      });
+      toast({
+        title: "An error occurred while creating the post.",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
     }
   };
 
@@ -209,13 +225,6 @@ const CreatePostForm = () => {
           </Button>
         </Center>
       </form>
-
-      {/* Success/Error Message */}
-      {message.text && (
-        <Text color={message.isSuccess ? "green.500" : "red.500"} mt="4">
-          {message.text}
-        </Text>
-      )}
     </Box>
   );
 };

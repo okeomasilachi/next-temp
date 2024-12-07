@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import {
   getAllPosts,
   getPostById,
@@ -7,6 +8,7 @@ import {
   updatePost,
   deletePost,
   getCategoriesArray,
+  addCommentToPost,
 } from "../utils/prismaUtils";
 import { NextResponse } from "next/server";
 
@@ -27,7 +29,7 @@ export async function fetchAllPosts() {
       (post): TransformedPost => ({
         id: post.id,
         title: post.title,
-        image: post.image || "https://picsum.photos/400/300",
+        image: post.image || "/logo.svg",
         categories: getCategoriesArray(post.categories || ""),
       })
     );
@@ -46,18 +48,20 @@ export async function fetchAllPosts() {
 }
 
 export async function PostComment({
-  postId,
-  content,
+  post_Id,
+  con_tent,
 }: {
-  postId: string;
-  content: string;
+  post_Id: string | Number;
+  con_tent: string;
 }) {
   try {
-    await addCommentToPost({
-      postId,
-      content,
+    const data = await addCommentToPost({
+      postId: post_Id,
+      content: con_tent,
     });
 
+    console.log(data);
+    // Revalidate the path
     return {
       success: true,
       message: "Comment added successfully",
@@ -172,6 +176,4 @@ export async function removePost(id: string | number) {
     );
   }
 }
-function addCommentToPost(arg0: { postId: string; content: string }) {
-  throw new Error("Function not implemented.");
-}
+

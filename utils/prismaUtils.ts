@@ -25,11 +25,11 @@ export async function getAllPosts() {
   }
 }
 
-export async function addCommentToPost({ postId, content }: { postId: string; content: string }) {
+export async function addCommentToPost({ postId, content }: { postId: string | Number; content: string }) {
   // Replace this with your actual Prisma query
   return await prisma.comment.create({
     data: {
-      content,
+      content: content,
       postId: Number(postId),
     },
   });

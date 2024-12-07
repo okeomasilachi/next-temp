@@ -75,10 +75,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // viewport: {
-  //   width: 'device-width',
-  //   initialScale: 1,
-  // },
   verification: {
     google: 'your-google-verification-code', // Add your actual Google verification code
   },
@@ -90,13 +86,6 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png', // Add your actual Apple icon path
   },
   category: 'Automotive Services',
-  // contacts: [
-  //   {
-  //     phone: '+234-704-682-0507',
-  //     address: '2 Unity Close, Off Chief G U Ake Road, After Unity Oil And Gas, Eliozu',
-  //     instagram: '@carcare_mobile_carwash'
-  //   }
-  // ]
 };
 
 export default function RootLayout({
@@ -106,7 +95,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-blue-50`}>
+      <body className={`${inter.className} overflow-x-hidden`}>
         <Providers>
           <Navbar />
           <main className='pt-10'>

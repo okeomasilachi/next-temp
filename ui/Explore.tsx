@@ -9,23 +9,23 @@ export default function Explore() {
                 <Heading size={'lg'}>Explore Our Premium Services</Heading>
                 <Text textAlign={'justify'}>At care care, we offer a range of top-notch car wash and detailing services designed to meet your vehicle’s needs. From basic washes to comprehensive detailing and polishing, our expert team ensures your car looks its best. Discover the perfect service for your car today.</Text>
             </SimpleGrid>
-            <SimpleGrid gap={10} columns={{ base: 1, md: 3 }} mb={5}>
+            <SimpleGrid gap={10} columns={{ base: 1, md: 3 }} my={20}>
                 {[
                     { img: "/img10.jpg", title: "Basic Car Wash Excellence", description: "Our Basic Car Wash service includes a thorough exterior wash, tire cleaning, and window cleaning. It's ideal for regular maintenance to keep your vehicle looking fresh and clean." },
                     { img: "/img8.jpg", title: "Comprehensive Detailing Service", description: "Our Detailing Service offers deep cleaning and restoration for both the interior and exterior of your vehicle. Perfect for rejuvenating your car's appearance." },
                     { img: "/img11.jpg", title: "Professional Polishing Service", description: "Our Polishing Service restores your vehicle's shine and protects the paintwork from environmental damage. Ideal for cars needing extra care." },
                 ].map((i, idx) => (
-                    <VStack key={idx} p={2} borderRadius={20} bg='blue.50' justifyContent={'space-between'} mx={'auto'} maxW={300}>
+                    <VStack key={idx} p={2} rounded={'xl'} boxShadow={'lg'} bg='gray.50' justifyContent={'space-between'} mx={'auto'} maxW={300}>
                         <Image alt="Car wash service" rounded={'xl'} src={i.img} boxSize={200} w='full' loading="lazy" />
                         <Heading alignSelf={'start'} size={'md'} my={3}>{i.title}</Heading>
                         <Text mb={10}>{i.description}</Text>
-                        <Button alignSelf={'start'} colorScheme="white" borderColor={'black'} borderRightColor={'black'} borderBottomColor={'black'} textColor="blue.500" size="lg" variant="outline">
+                        {/* <Button alignSelf={'start'} colorScheme="white" borderColor={'black'} mx="auto" mb={5} borderRightColor={'black'} borderBottomColor={'black'} textColor="blue.500" size="lg" variant="outline">
                             Learn More
-                        </Button>
+                        </Button> */}
                     </VStack>
                 ))}
             </SimpleGrid>
-            <SimpleGrid gap={10} columns={{ base: 1, md: 2 }} my={40}>
+            <SimpleGrid gap={10} columns={{ base: 1, md: 2 }} my={20}>
                 <Center>
                     <VStack>
                         <Heading alignSelf={'start'} size={'lg'}>Convenient Online Booking</Heading>

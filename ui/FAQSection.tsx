@@ -3,7 +3,7 @@ import { Box, Heading, Text, Accordion, AccordionItem, AccordionButton, Accordio
 function FAQSection() {
     return (
 
-        <Container mb={40} py={10} px={5} mx="auto">
+        <Container mb={10} py={10} px={5} mx="auto">
             {/* FAQ Header */}
             <VStack spacing={4} textAlign="center" mb={10}>
                 <Heading size="lg">FAQs</Heading>

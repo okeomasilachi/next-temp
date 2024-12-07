@@ -3,7 +3,7 @@ import { CheckCircle } from "lucide-react";
 
 const PricingPlan = () => {
     return (
-        <Container textAlign="center" p={10} mx="auto">
+        <Container textAlign="center" p={10} mb={20} mx="auto">
             <Heading as="h2" size="xl" mb={4}>
                 Pricing Plans
             </Heading>

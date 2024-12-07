@@ -37,9 +37,12 @@ export default function BlogPostPage() {
         setIsLoading(true);
         const postData = await fetchPostById(params.postId);
 
+        console.log(postData);
         if (postData) {
           setPost(postData);
-          setComments(postData.comments || []);
+          if ("comments" in postData) {
+            setComments(postData.comments || []);
+          }
           console.log(postData);
           setError(null);
         } else {
@@ -71,11 +74,16 @@ export default function BlogPostPage() {
       setIsSubmitting(true);
       const cleanedComment = newComment.trim();
       const newCommentData = await PostComment({
-        postId: params.postId,
-        content: cleanedComment,
+        post_Id: params.postId,
+        con_tent: cleanedComment,
       });
 
-      setComments((prev) => [...prev, newCommentData]);
+      const updatedPost = await fetchPostById(params.postId);
+      if (updatedPost) {
+        setPost(updatedPost);
+        // @ts-ignore
+        setComments(updatedPost.comments || []);
+      }
       setNewComment("");
       toast({
         title: "Comment added successfully",
@@ -164,7 +172,13 @@ export default function BlogPostPage() {
             <Heading size="md">Comments</Heading>
             {comments.length > 0 ? (
               comments.map((comment) => (
-                <Box key={comment.id} p={4} shadow="sm" bg="gray.50" rounded="md">
+                <Box
+                  key={comment.id}
+                  p={4}
+                  shadow="sm"
+                  bg="gray.50"
+                  rounded="md"
+                >
                   <Text fontWeight="bold">{comment.author || "Anonymous"}</Text>
                   <Text>{comment.content}</Text>
                 </Box>
