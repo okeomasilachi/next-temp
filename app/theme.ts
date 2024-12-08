@@ -50,11 +50,13 @@ const Button = {
   },
   variants: {
     solid: (props: { colorScheme: string }) => ({
-      color: props.colorScheme === "black" ? "primary.500" : "white",
+      color: props.colorScheme === "black" ? "primary.600" : "white",
+      bg: props.colorScheme === "black" ? "white" : "primary.600",
     }),
-    // outline: (props: { colorScheme: string }) => ({
-    //   color: props.colorScheme === "black" ? "primary.500" : "white",
-    // }),
+    outline: (props: { colorScheme: string }) => ({
+      color: props.colorScheme === "black" ? "primary.700" : "white",
+      bg: props.colorScheme === "black" ? "white" : "primary.600",
+    }),
   },
   defaultProps: {
     colorScheme: "primary",
