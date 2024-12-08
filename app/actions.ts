@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import {
   getAllPosts,
   getPostById,
@@ -19,7 +18,7 @@ export async function fetchAllPosts() {
 
     // Transform posts to include categories as an array
     interface TransformedPost {
-      id: number;
+      id: string;
       title: string;
       image: string;
       categories: string[];
@@ -51,7 +50,7 @@ export async function PostComment({
   post_Id,
   con_tent,
 }: {
-  post_Id: string | Number;
+  post_Id: string;
   con_tent: string;
 }) {
   try {
@@ -60,7 +59,6 @@ export async function PostComment({
       content: con_tent,
     });
 
-    console.log(data);
     // Revalidate the path
     return {
       success: true,
@@ -74,9 +72,9 @@ export async function PostComment({
   }
 }
 // Server action to get a post by ID
-export async function fetchPostById(id: string | number) {
+export async function fetchPostById(id: string) {
   try {
-    const post = await getPostById(Number(id));
+    const post = await getPostById(id);
     if (post) {
       // Transform post to include categories as an array
       return {
@@ -134,14 +132,14 @@ export async function createPost(newPost: {
 
 // Server action to update a post by ID
 export async function modifyPost(updatedPost: {
-  id: number;
+  id: String;
   title?: string;
   categories?: string[];
   excerpt?: string;
   image?: string;
 }) {
   try {
-    const result = await updatePost(Number(updatedPost.id), updatedPost);
+    const result = await updatePost(updatedPost.id as string, updatedPost);
     if (result.success) {
       // Transform post to include categories as an array
       if (result.post) {
@@ -161,9 +159,9 @@ export async function modifyPost(updatedPost: {
 }
 
 // Server action to delete a post by ID
-export async function removePost(id: string | number) {
+export async function removePost(id: string) {
   try {
-    const result = await deletePost(Number(id));
+    const result = await deletePost(id);
     if (result.success) {
       return NextResponse.json(result, { status: 200 });
     } else {

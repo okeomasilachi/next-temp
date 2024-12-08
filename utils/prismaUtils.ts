@@ -25,18 +25,18 @@ export async function getAllPosts() {
   }
 }
 
-export async function addCommentToPost({ postId, content }: { postId: string | Number; content: string }) {
+export async function addCommentToPost({ postId, content }: { postId: string ; content: string }) {
   // Replace this with your actual Prisma query
   return await prisma.comment.create({
     data: {
       content: content,
-      postId: Number(postId),
+      postId: postId,
     },
   });
 }
 
 
-export async function getPostById(id: number) {
+export async function getPostById(id: string) {
   try {
     return await prisma.post.findUnique({
       where: { id },
@@ -67,7 +67,7 @@ export async function addPost(newPost: {
         title: newPost.title,
         categories: newPost.categories || '',
         excerpt: newPost.excerpt,
-        image: newPost.image || 'https://picsum.photos/400/300'
+        image: newPost.image || '/logo.svg'
       }
     });
 
@@ -85,7 +85,7 @@ export async function addPost(newPost: {
   }
 }
 
-export async function updatePost(id: number, updatedPost: {
+export async function updatePost(id: string, updatedPost: {
   title?: string,
   categories?: string[] | string,
   excerpt?: string,
@@ -130,7 +130,7 @@ export function getCategoriesArray(categoriesString?: string | null): string[] {
     : [];
 }
 
-export async function deletePost(id: number) {
+export async function deletePost(id: string) {
   try {
     await prisma.post.delete({
       where: { id }
