@@ -1,29 +1,23 @@
 "use client";
 
-import React from "react";
 import {
-  Box,
-  Container,
-  Heading,
-  SimpleGrid,
-  Text,
-  VStack,
-  Stack,
-  Button,
-  Icon,
-  Divider,
-  Image,
   Accordion,
   AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
+  Button,
+  Container,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack
 } from "@chakra-ui/react";
-import { AnimatePresence } from "framer-motion";
-import { m } from "ui/m";
-import Testimonials from "./Teastimonial";
 import { LocateIcon, Shield, Star } from "lucide-react";
-
+import React from "react";
+import { socialLinks as sl } from 'lib/data';
+import Testimonials from "./Teastimonial";
 interface GridItemMProps {
   title: string;
   description: string;
@@ -120,29 +114,29 @@ const ServicesGrid: React.FC = () => {
       <Container py={{ md: 10 }}>
         {/* Hero Section */}
         <VStack spacing={6} textAlign="center" mb={10}>
-          <Heading as="h1" size="2xl">
+          <Heading as="h1" size="xl">
             Professional Mobile Car Wash & Detailing
           </Heading>
-          <Text fontSize="lg" color="gray.600">
+          <Text color="gray.600" mx='auto' maxW={500}>
             Experience top-notch car care with convenience at your doorstep. Let
             us handle every detail with our specialized services.
           </Text>
-          <Button colorScheme="primary" size="lg" my={5}>
+          <Button colorScheme="blue" my={5} as='a' href={sl.whatsapp}>
             Book a Service
           </Button>
         </VStack>
 
         {/* Services Grid */}
-          <Accordion>
+          <Accordion defaultIndex={[0]}>
           {servicesData.map((service, index) => (
             <AccordionItem key={index}>
               <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
+                <Text as="span" fontWeight='bold' flex="1" textAlign="left">
                 {service.title}
-                </Box>
+                </Text>
                 <AccordionIcon />
               </AccordionButton>
-              <AccordionPanel borderLeft='2px solid' ml={10} borderLeftColor={'blue.800'} pb={4}>
+              <AccordionPanel borderLeft='2px solid' ml={5} my={3} borderLeftColor={'primary.600'} pb={4}>
               {service.description}
               </AccordionPanel>
             </AccordionItem>
@@ -185,7 +179,7 @@ const ServicesGrid: React.FC = () => {
             Contact us to schedule a service today and see the Car Care
             difference for yourself.
           </Text>
-          <Button colorScheme="black" size="lg">
+          <Button colorScheme="blue" as='a' href={sl.whatsapp} variant="outline" size="lg">
             Contact Us
           </Button>
         </VStack>

@@ -80,12 +80,12 @@ export default function Blog() {
       color='black'
     >
       {/* Header Section */}
-      <Box as="header" bg="blue.800" py={20} textAlign="center">
+      <Box as="header" bg="primary.600" py={20} textAlign="center">
         <Heading color="white">Expert Car Care Tips & Updates</Heading>
         <Text color="whiteAlpha.800" mt={2}>
           Discover the best ways to maintain your car’s cleanliness and value.
         </Text>
-        <Button mt={4} bg="white" color="blue.800" _hover={{ color: "white", bg: "blue.500"}} as="a" href="/booking">
+        <Button mt={4} colorScheme="white" variant={'outline'} borderColor={'black'} as="a" href="/booking">
           Book a Wash
         </Button>
       </Box>
@@ -103,12 +103,12 @@ export default function Blog() {
                     py={1}
                     borderRadius='full'
                     variant='outline'
-                    colorScheme='blue'
+                    colorScheme='primary'
                     key={category.id}
                     _hover={{
-                      bg: selectedCategory !== category.name ? 'blue.100' : '',
+                      bg: selectedCategory !== category.name ? 'primary.100' : '',
                     }}
-                    bg={selectedCategory === category.name ? "blue.800" : ""}
+                    bg={selectedCategory === category.name ? "primary.600" : ""}
                     cursor="pointer"
                     onClick={() => setSelectedCategory(category.name)}
                     color={selectedCategory === category.name ? "white" : "black"}

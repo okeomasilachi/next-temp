@@ -49,12 +49,22 @@ export const metadata: Metadata = {
     "home service car wash",
     "professional car cleaning"
   ],
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png" },
+      { url: "/favicon-16x16.png" },
+    ],
+    apple: [{ rel: "apple-touch-icon", sizes: "180x180", url: "/apple-touch-icon.png" }],
+    other: [
+      { rel: "manifest", url: "/site.webmanifest" },
+    ],
+  },
   openGraph: {
     title: "CARCARE Mobile Carwash | Professional Auto Detailing Services",
     description: "Professional mobile car wash service offering complete auto detailing, ceramic coating, engine detailing, and interior deep cleaning with home service available in Eliozu.",
     type: "website",
     locale: "en_NG",
-    siteName: "CARCARE Mobile Carwash",
+    siteName: "CAR-CARE Mobile Carwash",
     images: [
       {
         url: "/og-image.jpg", // You'll need to add your actual OG image path
@@ -76,14 +86,10 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Add your actual Google verification code
+    google: 'your-google-verification-code',
   },
   alternates: {
-    canonical: 'https://www.carcaremobilecarwash.com', // Replace with your actual domain
-  },
-  icons: {
-    icon: '/favicon.ico', // Add your actual favicon path
-    apple: '/apple-icon.png', // Add your actual Apple icon path
+    canonical: 'https://www.carcaremobilecarwash.com',
   },
   category: 'Automotive Services',
 };

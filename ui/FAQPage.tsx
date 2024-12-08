@@ -1,4 +1,5 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Container, Divider, Heading, Text } from "@chakra-ui/react";
+import { socialLinks as sl } from "@/lib/data";
 
 const FAQPage = () => {
     return (
@@ -55,12 +56,12 @@ const FAQPage = () => {
             </Container>
 
             {/* CTA Section */}
-            <Box bg="gray.50" py={40} textAlign="center">
+            <Box py={20} textAlign="center">
                 <Heading as="h3" fontSize="2xl" mb={2}>
                     Need More Help?
                 </Heading>
                 <Text mb={4}>Contact us for any additional questions or assistance.</Text>
-                <Button colorScheme="blue" size="lg" px={6}>
+                <Button colorScheme="blue" as='a' href={sl.whatsapp} size="lg" px={6}>
                     Get in Touch
                 </Button>
             </Box>

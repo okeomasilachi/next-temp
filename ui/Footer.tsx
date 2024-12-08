@@ -1,5 +1,6 @@
 "use client";
 import { Link, Image  } from '@chakra-ui/next-js';
+import { socialLinks as sl } from 'lib/data';
 import { Box, Container, Divider, Flex, Heading, HStack, Icon, Text, VStack } from '@chakra-ui/react';
 import { faInstagram, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +9,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <Box as="footer" bg="primary.700" color="white" py={20} px={5} borderTop="1px solid" borderColor="gray.500">
+    <Box as="footer" bg="primary.600" color="white" py={20} px={5} borderTop="1px solid" borderColor="gray.500">
       <Container maxW="container.xl">
         <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between" align={{ base: 'start', lg: 'center' }} gap="8">
           {/* Logo and Description */}
@@ -26,10 +27,10 @@ const Footer: React.FC = () => {
               <Heading as="h2" size="md" fontWeight="bold">
                 Company
               </Heading>
-              <Link color='gray.300' href="#" fontSize="lg" fontWeight="10px" mt="2" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="/about" fontSize="lg" fontWeight="10px" mt="2" _hover={{ textDecoration: 'underline' }}>
                 About Us
               </Link>
-              <Link color='gray.300' href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="/services" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
                 Services
               </Link>
             </VStack>
@@ -39,10 +40,10 @@ const Footer: React.FC = () => {
               <Heading as="h2" size="md" fontWeight="bold">
                 Support
               </Heading>
-              <Link color='gray.300' href="#" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href="/faqs" fontSize="lg" mt="2" _hover={{ textDecoration: 'underline' }}>
                 Faqs
               </Link>
-              <Link color='gray.300' href="#" fontSize="lg" _hover={{ textDecoration: 'underline' }}>
+              <Link color='gray.300' href={sl.whatsapp} fontSize="lg" _hover={{ textDecoration: 'underline' }}>
                 Booking
               </Link>
             </VStack>
@@ -74,20 +75,17 @@ const Footer: React.FC = () => {
 
           {/* Social Media Icons */}
           <HStack gap="4" alignItems={'center'} justifyContent={'end'}>
-            <Link href="#" aria-label="Facebook" color="white" _hover={{ color: 'blue.500' }}>
-              <Icon as={Facebook} boxSize="20px" mb={2} h='full' />
-            </Link>
-            
-            <Link href="#" aria-label="Twitter" color="white" _hover={{ color: '#25d366' }}>
+                        
+          <Link href={sl.whatsapp} aria-label="whatsapp" color="white" _hover={{ color: '#25d366' }}>
               <Icon as={FontAwesomeIcon} icon={faWhatsapp} boxSize="20px" h='full'/>
             </Link>
-
-            <Link href="#" aria-label="Instagram" color="white" _hover={{ color: 'pink.500' }}>
-              <Icon as={FontAwesomeIcon} icon={faInstagram}  boxSize="20px" h='full'/>
-            </Link>
             
-            <Link href="#" aria-label="Twitter" color="white" _hover={{ color: 'blue.400' }}>
-              <Icon as={FontAwesomeIcon} icon={faXTwitter} boxSize="20px" h='full'/>
+            <Link href={sl.facebook} aria-label="Facebook" color="white" _hover={{ color: 'blue.500' }}>
+              <Icon as={Facebook} boxSize="20px" pb={2} h='full' />
+            </Link>
+
+            <Link href={sl.instagram} aria-label="Instagram" color="white" _hover={{ color: 'pink.500' }}>
+              <Icon as={FontAwesomeIcon} icon={faInstagram}  boxSize="20px" h='full'/>
             </Link>
           </HStack>
         </Flex>

@@ -54,9 +54,13 @@ const Button = {
       bg: props.colorScheme === "black" ? "white" : "primary.600",
     }),
     outline: (props: { colorScheme: string }) => ({
-      color: props.colorScheme === "black" ? "primary.700" : "white",
-      bg: props.colorScheme === "black" ? "white" : "primary.600",
-    }),
+        color: "primary.600",
+        bg: "white",
+        _hover: {
+          bg: "primary.600",
+          color: "white",
+        },
+      }),
   },
   defaultProps: {
     colorScheme: "primary",

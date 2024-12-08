@@ -3,6 +3,7 @@
 import {
   Avatar,
   Box,
+  Container,
   Divider,
   Flex,
   HStack,
@@ -116,15 +117,15 @@ const TestimonialsSection = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Change testimonial every 5 seconds
+    }, 6000); // Change testimonial every 5 seconds
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <Box my={10}>
+    <Container my={10} overflowX="hidden">
       <Box textAlign="center" mb={8}>
-        <Text fontSize="3xl" fontWeight="bold">
+        <Text fontSize="xl" fontWeight="bold">
           Hear What Our Customers Have to Say!
         </Text>
         <Text fontSize="lg" color="gray.600">
@@ -174,6 +175,7 @@ const TestimonialsSection = () => {
                     mb="4"
                   >
                     <Icon
+                      display={{ base: "none", md: "block" }}
                       transform="rotate(180deg)"
                       position={"absolute"}
                       fontSize={"xx-large"}
@@ -182,10 +184,9 @@ const TestimonialsSection = () => {
                     >
                       <Quote />
                     </Icon>
-                    <span className="italic">
-                      {testimonial.content}
-                    </span>
+                    <span className="italic">{testimonial.content}</span>
                     <Icon
+                      display={{ base: "none", md: "block" }}
                       bottom={-4}
                       right={-10}
                       position={"absolute"}
@@ -219,21 +220,21 @@ const TestimonialsSection = () => {
           ))}
         </Flex>
       </Box>
-      <Flex justifyContent={"center"} gap={2} mt={8} cursor={'pointer'}>
-          {testimonials.map((_, index) => (
-            <Box
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              borderRadius="full"
-              bg={currentIndex === index ? "blue.600" : "gray.300"}
-              w={currentIndex === index ? 4 : 2}
-              h={2}
-              transition="all 0.3s"
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
-        </Flex>
-    </Box>
+      <Flex justifyContent={"center"} gap={2} mt={8} cursor={"pointer"}>
+        {testimonials.map((_, index) => (
+          <Box
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            borderRadius="full"
+            bg={currentIndex === index ? "blue.600" : "gray.300"}
+            w={currentIndex === index ? 4 : 2}
+            h={2}
+            transition="all 0.3s"
+            aria-label={`Go to testimonial ${index + 1}`}
+          />
+        ))}
+      </Flex>
+    </Container>
   );
 };
 
